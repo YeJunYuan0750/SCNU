@@ -36,6 +36,7 @@ BACKBONES = ["resnet50", "efficientnet_b0", "mobilenet_v3_large"]
 # ---------------------------------------------------------------
 IMAGE_SIZE = 224          # 训练/推理输入尺寸
 RESIZE_SIZE = 256         # 评估阶段的先缩放尺寸
+DRAFT_SIZE = 288          # JPEG 抽稀解码目标短边（>= 训练裁剪后尺寸即可，显著减少解码耗时）
 IMAGENET_MEAN = [0.485, 0.456, 0.406]
 IMAGENET_STD = [0.229, 0.224, 0.225]
 

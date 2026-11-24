@@ -14,13 +14,19 @@ import config
 
 
 class FoodDataset(Dataset):
-    """目录结构：root/{split}/{class}/xxx.jpg，class 子目录名即标签。"""
+    """目录结构：root/{split}/{class}/xxx.jpg，class 子目录名即标签。
 
-    def __init__(self, root, classes, transform=None):
+    draft_size：JPEG 解码时按 1/2、1/4、1/8 抽稀解码（PIL 的 draft 模式），
+    在保证短边不小于 draft_size 的前提下把解码量降到 1/4 甚至更少，
+    是本机（无独立显卡工作站、CPU 为 4 核）训练提速的关键。
+    """
+
+    def __init__(self, root, classes, transform=None, draft_size=None):
         self.root = root
         self.classes = list(classes)
         self.class_to_idx = {c: i for i, c in enumerate(self.classes)}
         self.transform = transform
+        self.draft_size = draft_size
         self.samples = []
         for c in self.classes:
             cdir = os.path.join(root, c)
@@ -37,7 +43,14 @@ class FoodDataset(Dataset):
 
     def __getitem__(self, idx):
         path, label = self.samples[idx]
-        img = Image.open(path).convert("RGB")
+        img = Image.open(path)
+        if self.draft_size:
+            try:
+                img.draft("RGB", (self.draft_size, self.draft_size))
+            except Exception:
+                pass
+        if img.mode != "RGB":
+            img = img.convert("RGB")
         if self.transform is not None:
             img = self.transform(img)
         return img, label
@@ -69,13 +82,20 @@ def build_dataloaders(data_dir, classes=None, batch_size=None, num_workers=None)
     batch_size = batch_size or config.BATCH_SIZE
     num_workers = config.NUM_WORKERS if num_workers is None else num_workers
 
-    train_ds = FoodDataset(os.path.join(data_dir, "train"), classes, get_train_transform())
-    val_ds = FoodDataset(os.path.join(data_dir, "val"), classes, get_eval_transform())
-    test_ds = FoodDataset(os.path.join(data_dir, "test"), classes, get_eval_transform())
+    train_ds = FoodDataset(os.path.join(data_dir, "train"), classes, get_train_transform(),
+                           draft_size=config.DRAFT_SIZE)
+    val_ds = FoodDataset(os.path.join(data_dir, "val"), classes, get_eval_transform(),
+                         draft_size=config.RESIZE_SIZE)
+    test_ds = FoodDataset(os.path.join(data_dir, "test"), classes, get_eval_transform(),
+                          draft_size=config.RESIZE_SIZE)
 
     def _loader(ds, shuffle):
+        kw = {}
+        if num_workers > 0:
+            kw["persistent_workers"] = True   # 各 epoch 复用 worker，省去重复启动开销
+            kw["prefetch_factor"] = 4
         return DataLoader(ds, batch_size=batch_size, shuffle=shuffle,
-                          num_workers=num_workers, pin_memory=torch.cuda.is_available())
+                          num_workers=num_workers, pin_memory=torch.cuda.is_available(), **kw)
 
     return (_loader(train_ds, True), _loader(val_ds, False), _loader(test_ds, False),
             len(train_ds), len(val_ds), len(test_ds))
