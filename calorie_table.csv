@@ -1,0 +1,31 @@
+class,name_cn,energy_kcal_100g,protein_g_100g,fat_g_100g,carb_g_100g,source
+pizza,披萨,266,11.0,10.0,33.0,USDA FoodData Central
+hamburger,汉堡包,295,17.0,14.0,24.0,USDA FoodData Central
+sushi,寿司,150,5.0,1.0,30.0,中国食物成分表（第6版）
+fried_rice,炒饭,163,5.0,6.0,22.0,中国食物成分表（第6版）
+dumplings,饺子,220,8.0,9.0,27.0,中国食物成分表（第6版）
+ramen,拉面,120,4.0,3.0,20.0,中国食物成分表（第6版）
+steak,牛排,271,25.0,19.0,0.0,USDA FoodData Central
+chicken_wings,炸鸡翅,288,18.0,19.0,0.0,USDA FoodData Central
+french_fries,炸薯条,312,3.4,15.0,41.0,USDA FoodData Central
+hot_dog,热狗,290,10.0,17.0,24.0,USDA FoodData Central
+spaghetti_bolognese,意式肉酱面,132,6.0,5.0,15.0,中国食物成分表（第6版）
+spaghetti_carbonara,培根蛋面,180,7.0,9.0,18.0,中国食物成分表（第6版）
+lasagna,千层面,135,6.0,5.0,16.0,中国食物成分表（第6版）
+pancakes,松饼,227,6.0,10.0,28.0,USDA FoodData Central
+waffles,华夫饼,291,8.0,14.0,33.0,USDA FoodData Central
+donuts,甜甜圈,421,4.9,23.0,51.0,USDA FoodData Central
+ice_cream,冰淇淋,207,3.5,11.0,24.0,USDA FoodData Central
+chocolate_cake,巧克力蛋糕,371,5.0,15.0,53.0,USDA FoodData Central
+cheesecake,芝士蛋糕,321,5.5,22.0,26.0,USDA FoodData Central
+apple_pie,苹果派,237,2.0,11.0,34.0,USDA FoodData Central
+caesar_salad,凯撒沙拉,104,4.0,8.0,4.0,中国食物成分表（第6版）
+greek_salad,希腊沙拉,61,2.0,5.0,3.0,USDA FoodData Central
+grilled_salmon,烤三文鱼,206,22.0,13.0,0.0,USDA FoodData Central
+peking_duck,北京烤鸭,337,19.0,28.0,0.0,中国食物成分表（第6版）
+spring_rolls,春卷,154,5.0,5.0,22.0,中国食物成分表（第6版）
+bibimbap,石锅拌饭,110,3.0,3.0,18.0,中国食物成分表（第6版）
+pad_thai,泰式炒河粉,153,5.0,5.0,23.0,中国食物成分表（第6版）
+tacos,墨西哥卷饼,226,11.0,10.0,23.0,USDA FoodData Central
+gyoza,日式煎饺,190,7.0,7.0,24.0,中国食物成分表（第6版）
+omelette,煎蛋卷,154,11.0,12.0,1.0,USDA FoodData Central

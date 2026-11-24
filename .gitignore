@@ -1,0 +1,37 @@
+# ---- Python ----
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.ipynb_checkpoints/
+
+# ---- 数据（体积大，不入库，按 README 获取）----
+data/
+food-101/
+*.zip
+*.tar.gz
+
+# ---- 训练产物与权重 ----
+output/
+runs/
+*.pth
+*.pt
+*.onnx
+results_*.json
+curves_*.png
+
+# ---- 冒烟测试临时产物 ----
+_smoke_data/
+_smoke_output/
+
+# ---- 本地预览与工具 ----
+preview/
+.libs/
+.tools/
+
+# ---- 系统与编辑器 ----
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
